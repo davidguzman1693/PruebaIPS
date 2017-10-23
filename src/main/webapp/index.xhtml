@@ -95,9 +95,10 @@ xmlns:p="http://primefaces.org/ui">
         <p:panelGrid columns="1">
             <p:commandButton value="Agregar articulo" onclick="PF('articulo').show();" />
          </p:panelGrid>
+        <h:form>
         <p:dialog header="Agregar articulo" widgetVar="articulo" modal="true"
             showEffect="explode" hideEffect="explode">
-            <h:form>
+            
                 <p:panelGrid columns="2">
                     <f:facet name="header">
                         Agregar articulo
@@ -106,10 +107,11 @@ xmlns:p="http://primefaces.org/ui">
                     <p:inputText value="#{articuloBean.aritucloDto.nombre}"/>
                     <p:outputLabel value="Valor "/>
                     <p:spinner value="#{articuloBean.aritucloDto.valor}" min="0" />
-                    <p:commandButton update=":form:table" onclick="PF('operario').hide();" value="Ingresar" actionListener="#{articuloBean.ingresarArticulo()}"/>
+                    <p:commandButton update=":formArticulo:tableArt" onclick="PF('articulo').hide();" value="Ingresar" actionListener="#{articuloBean.ingresarArticulo()}"/>
                 </p:panelGrid>
-            </h:form>
+            
         </p:dialog>
+        </h:form>
         <h:form id="editFormArt">
             <p:dialog header="Vista de cliente" widgetVar="articuloEditDialog" modal="true"
                 showEffect="explode" hideEffect="explode">
@@ -118,6 +120,7 @@ xmlns:p="http://primefaces.org/ui">
                             <f:facet name="header">
                                 Editar articulo
                             </f:facet>
+                            
                             <p:outputLabel value="Nombre  "/>
                             <p:inputText value="#{articuloBean.aritucloDto.nombre}" />
                             <p:outputLabel value="Valor "/>
@@ -128,7 +131,6 @@ xmlns:p="http://primefaces.org/ui">
                     </p:outputPanel>
 
             </p:dialog>
-            <h:messages globalOnly="true" />
         </h:form>
     </body>
 </html>

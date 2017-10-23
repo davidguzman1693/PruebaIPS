@@ -79,11 +79,11 @@ public class ArticuloDao {
             cs = null;
             cn.setAutoCommit(false);
 
-            java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-            String sql = "update cliente set nombre='"+articuloDto.getNombre()+"', "+
+            String sql = "update articulo set nombre='"+articuloDto.getNombre()+"', "+
                     "valor='"+articuloDto.getValor()+"' " +
                     "  where idarticulo="+articuloDto.getIdarticulo()+";";
                     //                +sqlDate+;
+            System.out.println(sql);
             statement = cn.createStatement();
             statement.executeUpdate(sql);
             cn.commit();
@@ -97,13 +97,14 @@ public class ArticuloDao {
     public boolean eliminarArticulo(ArticuloDTO articuloDto){
         try{
             oc = new PostgresConexion();
-            cn = PostgresConexion.conexionBd();
+            cn = PostgresConexion.conexionBd(); 
             rs = null;
             cs = null;
             cn.setAutoCommit(false);
             String sql = "delete from articulo" +
                     "  where idarticulo="+articuloDto.getIdarticulo()+";";
                     //                +sqlDate+;
+            System.out.println(sql);
             statement = cn.createStatement();
             statement.executeUpdate(sql);
             cn.commit();
