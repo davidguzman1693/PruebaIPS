@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Clientes</title>
+    </h:head>
+    <h:body>
+        <p:outputLabel value="Bienvenido: " />
+        <p:outputLabel value="#{artClieBean.clienteDto.nombre}"/>
+        <br></br>
+        <p:outputLabel value="Articulos del cliente " />
+        <h:form id="formArticulo">
+            <p:dataTable id="tableArt" var="articuloClie" value="#{artClieBean.articulosClie}" emptyMessage="No hay articulos">
+            <p:column headerText="Nombre">
+                <h:outputText value="#{articuloClie.nombre}"/>
+            </p:column>
+            <p:column headerText="Valor">
+                <h:outputText value="#{articuloClie.valor}"/>
+            </p:column>
+            </p:dataTable>
+        </h:form>
+        <p:outputLabel value="Articulos libres" />
+        <h:form id="formArticuloRes">
+            <p:dataTable id="tableArtLibre" var="articuloLibre" value="#{artClieBean.articulosLibres}" emptyMessage="No hay articulos">
+            <p:column headerText="Nombre">
+                <h:outputText value="#{articuloLibre.nombre}"/>
+            </p:column>
+            <p:column headerText="Valor">
+                <h:outputText value="#{articuloLibre.valor}"/>
+            </p:column>
+            <p:column>
+                <p:commandButton value="Agregar al articulo" action="#{artClieBean.agregarArticuloACliente()}" >
+                    <f:setPropertyActionListener value="#{articuloLibre}" target="#{artClieBean.articuloDto}" />
+                </p:commandButton>
+            </p:column>
+            
+        </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

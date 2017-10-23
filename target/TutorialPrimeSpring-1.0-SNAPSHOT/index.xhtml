@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+ 
+    <h:head></h:head>
+    <body>
+        <h1>Bienvenido a la prueba</h1>
+        <h:form id="form">
+            <p:dataTable id="table" var="customer" value="#{clienteBean.customers}" emptyMessage="No hay clientes">
+            <p:column headerText="Nombre">
+                <h:outputText value="#{customer.nombre}"/>
+            </p:column>
+            <p:column headerText="Apellido">
+                <h:outputText value="#{customer.apellido}"/>
+            </p:column>
+            <p:column headerText="Identificacion">
+                <h:outputText value="#{customer.identificacion}"/>
+            </p:column>
+            
+            <p:column>
+                <p:commandButton value="Ver cliente" update=":editForm:clienteEdit"  oncomplete="PF('clienteEditDialog').show()" icon="ui-icon-search">
+                    <f:setPropertyActionListener value="#{customer}" target="#{clienteBean.clienteDto}" />
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+        </h:form>
+        <p:panelGrid columns="1">
+            <p:commandButton value="Agregar" onclick="PF('operario').show();" />
+         </p:panelGrid>
+        <p:dialog header="Agregar cliente" widgetVar="operario" modal="true"
+            showEffect="explode" hideEffect="explode">
+            <h:form>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Agregar cliente
+                    </f:facet>
+                    <p:outputLabel value="Nombre  "/>
+                    <p:inputText value="#{clienteBean.clienteDto.nombre}"/>
+                    <p:outputLabel value="Apellido "/>
+                    <p:inputText value="#{clienteBean.clienteDto.apellido}"></p:inputText>
+                    <p:outputLabel value="Edad "/>
+                    <p:spinner id="minMax" value="#{clienteBean.clienteDto.edad}" min="0" />
+                    <p:outputLabel value="Identifiacion  "/>
+                    <p:inputText value="#{clienteBean.clienteDto.identificacion}"></p:inputText>
+                    <p:commandButton update=":form:table" onclick="PF('operario').hide();" value="Ingresar" actionListener="#{clienteBean.ingresarCliente()}"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        <h:form id="editForm">
+            <p:dialog header="Vista de cliente" widgetVar="clienteEditDialog" modal="true"
+                showEffect="explode" hideEffect="explode">
+                    <p:outputPanel id="clienteEdit" style="text-align:center;">
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                Editar cliente
+                            </f:facet>
+                            <p:outputLabel value="Nombre  "/>
+                            <p:inputText value="#{clienteBean.clienteDto.nombre}" />
+                            <p:outputLabel value="Apellido "/>
+                            <p:inputText value="#{clienteBean.clienteDto.apellido}"></p:inputText>
+                            <p:outputLabel value="Edad "/>
+                            <p:spinner id="minMax" value="#{clienteBean.clienteDto.edad}" min="0" />
+                            <p:outputLabel value="Identifiacion  "/>
+                            <p:inputText value="#{clienteBean.clienteDto.identificacion}"></p:inputText>
+                            <p:commandButton update=":form:table" onclick="PF('clienteEditDialog').hide();" value="Editar" actionListener="#{clienteBean.editarCliente()}"/>
+                            <p:commandButton update=":form:table" onclick="PF('clienteEditDialog').hide();" value="Eliminar" actionListener="#{clienteBean.eliminarCliente()}"/>
+                        </p:panelGrid>
+                    </p:outputPanel>
+
+            </p:dialog>
+            <h:messages globalOnly="true" />
+        </h:form>
+        <br></br>
+        
+        <!--Articulos-->
+        <p:outputLabel value="Articulos " />
+        <h:form id="formArticulo">
+            <p:dataTable id="tableArt" var="articulo" value="#{articuloBean.articulos}" emptyMessage="No hay articulos">
+            <p:column headerText="Nombre">
+                <h:outputText value="#{articulo.nombre}"/>
+            </p:column>
+            <p:column headerText="Valor">
+                <h:outputText value="#{articulo.valor}"/>
+            </p:column>
+            <p:column>
+                <p:commandButton value="Ver articulo" update=":editFormArt:articuloEdit"  oncomplete="PF('articuloEditDialog').show()" icon="ui-icon-search">
+                    <f:setPropertyActionListener value="#{articulo}" target="#{articuloBean.aritucloDto}" />
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+        </h:form>
+        <p:panelGrid columns="1">
+            <p:commandButton value="Agregar articulo" onclick="PF('articulo').show();" />
+         </p:panelGrid>
+        <p:dialog header="Agregar articulo" widgetVar="articulo" modal="true"
+            showEffect="explode" hideEffect="explode">
+            <h:form>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Agregar articulo
+                    </f:facet>
+                    <p:outputLabel value="Nombre  "/>
+                    <p:inputText value="#{articuloBean.aritucloDto.nombre}"/>
+                    <p:outputLabel value="Valor "/>
+                    <p:spinner value="#{articuloBean.aritucloDto.valor}" min="0" />
+                    <p:commandButton update=":form:table" onclick="PF('operario').hide();" value="Ingresar" actionListener="#{articuloBean.ingresarArticulo()}"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+        <h:form id="editFormArt">
+            <p:dialog header="Vista de cliente" widgetVar="articuloEditDialog" modal="true"
+                showEffect="explode" hideEffect="explode">
+                    <p:outputPanel id="articuloEdit" style="text-align:center;">
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                Editar articulo
+                            </f:facet>
+                            <p:outputLabel value="Nombre  "/>
+                            <p:inputText value="#{articuloBean.aritucloDto.nombre}" />
+                            <p:outputLabel value="Valor "/>
+                            <p:spinner id="minMax" value="#{articuloBean.aritucloDto.valor}" min="0" />
+                            <p:commandButton update=":formArticulo:tableArt" onclick="PF('articuloEditDialog').hide();" value="Editar" actionListener="#{articuloBean.editarArticulo()}"/>
+                            <p:commandButton update=":formArticulo:tableArt" onclick="PF('articuloEditDialog').hide();" value="Eliminar" actionListener="#{articuloBean.eliminarArticulo()}"/>
+                        </p:panelGrid>
+                    </p:outputPanel>
+
+            </p:dialog>
+            <h:messages globalOnly="true" />
+        </h:form>
+    </body>
+</html>
+
+

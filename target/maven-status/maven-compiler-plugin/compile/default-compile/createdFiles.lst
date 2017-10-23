@@ -1,0 +1,11 @@
+com\mycompany\tutorialprimespring\DAO\ArtClieDao.class
+com\mycompany\tutorialprimespring\main\main.class
+com\mycompany\tutorialprimespring\bean\ArtClieBean.class
+com\mycompany\tutorialprimespring\sql\PostgresConexion.class
+com\mycompany\tutorialprimespring\bean\ArticuloBean.class
+com\mycompany\tutorialprimespring\bean\ClienteBean.class
+com\mycompany\tutorialprimespring\DTO\ClienteDTO.class
+com\mycompany\tutorialprimespring\DAO\ClienteDao.class
+com\mycompany\tutorialprimespring\DTO\ArticuloDTO.class
+com\mycompany\tutorialprimespring\DTO\ClieArtDTO.class
+com\mycompany\tutorialprimespring\DAO\ArticuloDao.class
